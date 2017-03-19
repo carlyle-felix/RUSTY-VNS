@@ -140,7 +140,7 @@ static void set_hs_type(int * btn_type , int  press_key)
  *modify g_vol_error g_vol_distance
  *
  */
-static void store_error()
+static store_error()
 {
 	int temp=0;
 	int vol_distance = 0;

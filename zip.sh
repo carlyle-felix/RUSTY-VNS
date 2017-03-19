@@ -21,7 +21,7 @@ then
 	mkbootimg_tools/mkboot boot.img boot.extracted
 	
 	echo "place Image.gz"
-	cp ../out/arch/arm64/boot/Image boot.extracted/kernel
+	cp ../out/arch/arm64/boot/Image.gz boot.extracted/kernel
 	
 	echo "create bootnew.img"
 	mkbootimg_tools/mkboot boot.extracted bootnew.img
