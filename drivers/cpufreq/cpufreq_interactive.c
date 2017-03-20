@@ -795,7 +795,7 @@ static void cpufreq_interactive_input_event(struct input_handle *handle,
 			tunables->boostpulse_endtime = ktime_to_us(ktime_get()) +
 				tunables->boostpulse_duration_val;
 
-			cpufreq_interactive_boost();
+			cpufreq_interactive_boost("input");
 			cpufreq_cpu_put(policy);
 		}
 	}
