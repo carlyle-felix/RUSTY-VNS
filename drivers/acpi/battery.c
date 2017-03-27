@@ -36,6 +36,8 @@
 #include <linux/suspend.h>
 #include <linux/delay.h>
 #include <asm/unaligned.h>
+#include <linux/earlysuspend.h>
+#include <linux/fastchg.h>
 
 #ifdef CONFIG_ACPI_PROCFS_POWER
 #include <linux/proc_fs.h>
@@ -1240,6 +1242,20 @@ static void __exit acpi_battery_exit(void)
 	acpi_unlock_battery_dir(acpi_battery_dir);
 #endif
 }
+
+ 	switch (online) {
+ 	case CONNECT_TYPE_USB:
+#ifdef CONFIG_FORCE_FAST_CHARGE
+		if (force_fast_charge == 1) {
+			BATT_LOG("cable USB forced fast charge");
+			htc_batt_info.rep.charging_source = CHARGER_AC;
+			radio_set_cable_status(CHARGER_AC);
+		} else {
+			BATT_LOG("cable USB");
+			htc_batt_info.rep.charging_source = CHARGER_USB;
+			radio_set_cable_status(CHARGER_USB);
+		}
+#endif
 
 module_init(acpi_battery_init);
 module_exit(acpi_battery_exit);
